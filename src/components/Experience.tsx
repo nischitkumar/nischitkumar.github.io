@@ -64,11 +64,18 @@ export default function Experience() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            className="border-l-2 border-accent pl-8 pb-8 relative dark:border-blue-500"
+                            className="relative pl-10"
                         >
+                            {/* Timeline Line */}
+                            {idx < experiences.length - 1 && (
+                                <div className="absolute left-2 top-8 bottom-0 w-0.5 bg-gradient-to-b from-accent to-accent/30 dark:from-blue-500 dark:to-blue-500/30" />
+                            )}
+                            
+                            {/* Timeline Dot */}
                             <motion.div
-                                className="absolute w-4 h-4 bg-accent rounded-full -left-3 top-1 dark:bg-blue-500"
-                                whileHover={{ scale: 1.2 }}
+                                className="absolute -left-1 top-2 w-5 h-5 bg-accent dark:bg-blue-500 rounded-full shadow-lg shadow-accent/50 dark:shadow-blue-500/50 border-4 border-cream dark:border-charcoal"
+                                whileHover={{ scale: 1.3, boxShadow: '0 0 20px rgba(0, 102, 204, 0.6)' }}
+                                transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                             />
 
                             <div className="space-y-3">
