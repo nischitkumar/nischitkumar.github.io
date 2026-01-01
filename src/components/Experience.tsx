@@ -73,7 +73,7 @@ export default function Experience() {
 
                             {/* Timeline Dot */}
                             <motion.div
-                                className="absolute -left-[5px] top-1 w-6 h-6 bg-accent dark:bg-blue-500 rounded-full shadow-lg shadow-accent/50 dark:shadow-blue-500/50 border-[3px] border-cream dark:border-charcoal"
+                                className="absolute -left-[5px] top-3 w-6 h-6 bg-accent dark:bg-blue-500 rounded-full shadow-lg shadow-accent/50 dark:shadow-blue-500/50 border-[3px] border-cream dark:border-charcoal"
                                 whileHover={{ scale: 1.3, boxShadow: '0 0 20px rgba(0, 102, 204, 0.6)' }}
                                 transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                             />
