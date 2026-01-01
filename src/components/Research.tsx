@@ -29,6 +29,7 @@ const researchPapers = [
         links: {
             paper: '#',
             github: '#',
+            arxiv: '#',
         },
         featured: true,
     },
@@ -42,6 +43,7 @@ const researchPapers = [
         links: {
             paper: '#',
             github: '#',
+            arxiv: '#',
         },
         featured: false,
     },

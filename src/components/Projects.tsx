@@ -13,6 +13,7 @@ const projects = [
         links: {
             github: '#',
             demo: '#',
+            paper: '#',
         },
     },
     {
@@ -24,6 +25,7 @@ const projects = [
         links: {
             github: '#',
             paper: '#',
+            demo: '#',
         },
     },
     {
@@ -34,6 +36,8 @@ const projects = [
         tech: ['TensorFlow Federated', 'gRPC', 'Kubernetes'],
         links: {
             github: '#',
+            paper: '#',
+            demo: '#',
         },
     },
 ];
