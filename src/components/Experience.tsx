@@ -56,7 +56,7 @@ export default function Experience() {
                     </p>
                 </div>
 
-                <div className="space-y-8">
+                <div className="space-y-0 relative">
                     {experiences.map((exp, idx) => (
                         <motion.div
                             key={idx}
@@ -64,16 +64,16 @@ export default function Experience() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            className="relative pl-10"
+                            className="relative pl-12 py-8"
                         >
-                            {/* Timeline Line */}
+                            {/* Timeline Line - extends from circle down */}
                             {idx < experiences.length - 1 && (
-                                <div className="absolute left-2 top-8 bottom-0 w-0.5 bg-gradient-to-b from-accent to-accent/30 dark:from-blue-500 dark:to-blue-500/30" />
+                                <div className="absolute left-[8.5px] top-10 h-20 w-0.5 bg-gradient-to-b from-accent to-accent/30 dark:from-blue-500 dark:to-blue-500/30" />
                             )}
-                            
+
                             {/* Timeline Dot */}
                             <motion.div
-                                className="absolute -left-1 top-2 w-5 h-5 bg-accent dark:bg-blue-500 rounded-full shadow-lg shadow-accent/50 dark:shadow-blue-500/50 border-4 border-cream dark:border-charcoal"
+                                className="absolute -left-[5px] top-1 w-6 h-6 bg-accent dark:bg-blue-500 rounded-full shadow-lg shadow-accent/50 dark:shadow-blue-500/50 border-[3px] border-cream dark:border-charcoal"
                                 whileHover={{ scale: 1.3, boxShadow: '0 0 20px rgba(0, 102, 204, 0.6)' }}
                                 transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                             />
