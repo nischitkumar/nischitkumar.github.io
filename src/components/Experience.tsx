@@ -56,51 +56,67 @@ export default function Experience() {
                     </p>
                 </div>
 
-                <div className="space-y-0 relative">
+                <div className="space-y-4">
                     {experiences.map((exp, idx) => (
                         <motion.div
                             key={idx}
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: idx * 0.1 }}
-                            className="relative pl-12 py-8"
+                            transition={{ delay: idx * 0.15, duration: 0.6 }}
+                            className="group p-6 bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-lg hover:border-accent/50 dark:hover:border-blue-500/50 transition-all duration-300 relative overflow-hidden"
                         >
-                            {/* Timeline Line - extends from circle down */}
-                            {idx < experiences.length - 1 && (
-                                <div className="absolute left-[8.5px] top-10 h-20 w-0.5 bg-gradient-to-b from-accent to-accent/30 dark:from-blue-500 dark:to-blue-500/30" />
-                            )}
+                            {/* Subtle top accent bar */}
+                            <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-accent via-accent/50 to-transparent dark:from-blue-500 dark:via-blue-500/50" />
 
-                            {/* Timeline Dot */}
-                            <motion.div
-                                className="absolute -left-[5px] top-3 w-6 h-6 bg-accent dark:bg-blue-500 rounded-full shadow-lg shadow-accent/50 dark:shadow-blue-500/50 border-[3px] border-cream dark:border-charcoal"
-                                whileHover={{ scale: 1.3, boxShadow: '0 0 20px rgba(0, 102, 204, 0.6)' }}
-                                transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                            />
+                            {/* Number indicator */}
+                            <div className="absolute -top-8 -right-8 text-8xl font-bold text-white/5 dark:text-white/[0.02] group-hover:text-white/10 dark:group-hover:text-white/[0.04] transition-colors duration-300">
+                                {String(idx + 1).padStart(2, '0')}
+                            </div>
 
-                            <div className="space-y-3">
-                                <div>
-                                    <h3 className="h-medium text-charcoal dark:text-cream">
-                                        {exp.role}
-                                    </h3>
-                                    <p className="text-accent dark:text-blue-400 font-medium">
-                                        {exp.organization}
-                                    </p>
-                                    <p className="text-sm text-slate dark:text-gray-400">
-                                        {exp.duration}
-                                    </p>
+                            <div className="relative space-y-3">
+                                {/* Header with duration badge */}
+                                <div className="flex items-start justify-between gap-4">
+                                    <div className="space-y-1 flex-1">
+                                        <h3 className="h-medium text-charcoal dark:text-cream group-hover:text-accent dark:group-hover:text-blue-400 transition-colors duration-300">
+                                            {exp.role}
+                                        </h3>
+                                        <p className="text-accent dark:text-blue-400 font-medium">
+                                            {exp.organization}
+                                        </p>
+                                    </div>
+                                    <motion.div
+                                        whileHover={{ scale: 1.05 }}
+                                        className="px-3 py-1 bg-accent/10 dark:bg-blue-500/10 border border-accent/30 dark:border-blue-500/30 rounded-full whitespace-nowrap"
+                                    >
+                                        <p className="text-xs font-semibold text-accent dark:text-blue-400">
+                                            {exp.duration}
+                                        </p>
+                                    </motion.div>
                                 </div>
 
-                                <p className="body-md">{exp.description}</p>
+                                {/* Description */}
+                                <p className="body-md pt-2">{exp.description}</p>
 
-                                <ul className="space-y-1 text-sm text-slate dark:text-gray-400">
+                                {/* Highlights */}
+                                <ul className="space-y-2 pt-2">
                                     {exp.highlights.map((highlight, i) => (
-                                        <li key={i} className="flex items-start gap-2">
-                                            <span className="text-accent dark:text-blue-400 mt-1">
-                                                ✓
-                                            </span>
-                                            {highlight}
-                                        </li>
+                                        <motion.li
+                                            key={i}
+                                            initial={{ opacity: 0, x: -10 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: idx * 0.15 + i * 0.05 }}
+                                            className="flex items-start gap-2 text-sm text-slate dark:text-gray-400"
+                                        >
+                                            <motion.span
+                                                className="text-accent dark:text-blue-400 font-semibold flex-shrink-0 mt-0.5"
+                                                whileHover={{ scale: 1.2, rotate: 10 }}
+                                            >
+                                                →
+                                            </motion.span>
+                                            <span>{highlight}</span>
+                                        </motion.li>
                                     ))}
                                 </ul>
                             </div>
