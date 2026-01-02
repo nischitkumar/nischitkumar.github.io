@@ -10,7 +10,7 @@ const navItems = [
     { label: 'Experience', href: '#experience' },
     { label: 'Projects', href: '#projects' },
     // { label: 'Research', href: '#research' },
-    { label: 'Contact', href: '#contact' },
+    // { label: 'Contact', href: '#contact' },
 ];
 
 export default function Navigation() {

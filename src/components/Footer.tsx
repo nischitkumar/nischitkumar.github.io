@@ -32,9 +32,9 @@ export default function Footer() {
                         {/* <a href="#research" className="hover:text-white transition-colors">
                             Research
                         </a> */}
-                        <a href="#contact" className="hover:text-white transition-colors">
+                        {/* <a href="#contact" className="hover:text-white transition-colors">
                             Contact
-                        </a>
+                        </a> */}
                     </div>
                 </div>
 

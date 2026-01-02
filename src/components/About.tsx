@@ -4,43 +4,54 @@ import { motion } from 'framer-motion';
 
 const skillCategories = [
     {
-        category: 'Machine Learning',
+        category: 'Core Areas',
         skills: [
-            { name: 'Deep Learning', level: 95 },
-            { name: 'NLP & Transformers', level: 90 },
-            { name: 'Computer Vision', level: 85 },
-            { name: 'Federated Learning', level: 92 },
+            { name: 'Deep Learning' },
+            { name: 'NLP & Transformers' },
+            { name: 'Federated Learning' },
+            { name: 'Reinforcement Learning' },
+            { name: 'Optimization of LLMs' },
         ],
     },
     {
         category: 'Systems & Infrastructure',
         skills: [
-            { name: 'Distributed Systems', level: 88 },
-            { name: 'Cloud Infrastructure', level: 85 },
-            { name: 'Kubernetes & Docker', level: 87 },
-            { name: 'Performance Optimization', level: 89 },
+            { name: 'Docker', level: 88 },
+            { name: 'Ray Engine', level: 85 },
         ],
     },
     {
         category: 'Programming Languages',
         skills: [
-            { name: 'Python', level: 98 },
-            { name: 'C++', level: 85 },
-            { name: 'TypeScript/JavaScript', level: 80 },
-            { name: 'Rust', level: 75 },
+            { name: 'Python' },
+            { name: 'C/C++' },
+            { name: 'MySQL' },
+        ],
+    },
+    {
+        category: 'Frameworks',
+        skills: [
+            { name: 'PyTorch' },
+            { name: 'TensorFlow' },
+        ],
+    },
+    {
+        category: 'Tools',
+        skills: [
+            { name: 'Git/Github' },
+            { name: 'Weights & Biases' },
         ],
     },
 ];
-
 const coursework = [
-    'Advanced Machine Learning',
-    'Deep Learning & Neural Networks',
-    'Natural Language Processing',
-    'Computer Vision',
-    'Distributed Systems',
-    'Systems Design & Architecture',
-    'Research Methodology',
-    'Applied Statistics',
+    'Linear Algebra',
+    'Probability & Statistics',
+    'Differential Equations',
+    'Control Theory',
+    'Computer Programming',
+    'Digital Design',
+    'Operating Systems',
+    'Econometric Methods'
 ];
 
 const onlineCoursework = [
@@ -50,22 +61,26 @@ const onlineCoursework = [
     { name: 'Computer Networks', platform: 'YouTube' },
 ];
 
-const SkillBar = ({ name, level }: { name: string; level: number }) => {
+const categoryColors = {
+    'Core Areas': { bg: 'bg-accent/10 dark:bg-blue-500/10', border: 'border-accent/30 dark:border-blue-500/30', text: 'text-accent dark:text-blue-400' },
+    'Systems & Infrastructure': { bg: 'bg-purple-500/10 dark:bg-purple-500/10', border: 'border-purple-500/30 dark:border-purple-500/30', text: 'text-purple-600 dark:text-purple-400' },
+    'Programming Languages': { bg: 'bg-emerald-500/10 dark:bg-emerald-500/10', border: 'border-emerald-500/30 dark:border-emerald-500/30', text: 'text-emerald-600 dark:text-emerald-400' },
+    'Frameworks': { bg: 'bg-orange-500/10 dark:bg-orange-500/10', border: 'border-orange-500/30 dark:border-orange-500/30', text: 'text-orange-600 dark:text-orange-400' },
+    'Tools': { bg: 'bg-rose-500/10 dark:bg-rose-500/10', border: 'border-rose-500/30 dark:border-rose-500/30', text: 'text-rose-600 dark:text-rose-400' },
+};
+
+const SkillTag = ({ name, categoryColor }: { name: string; categoryColor: keyof typeof categoryColors }) => {
+    const colors = categoryColors[categoryColor] || categoryColors['Core Areas'];
+
     return (
-        <motion.div className="space-y-2">
-            <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-charcoal dark:text-cream">{name}</span>
-                <span className="text-xs text-slate dark:text-gray-400">{level}%</span>
-            </div>
-            <div className="w-full h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                <motion.div
-                    className="h-full bg-accent dark:bg-blue-500 rounded-full"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, ease: 'easeOut', delay: 0.2 }}
-                />
-            </div>
+        <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3 }}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium ${colors.bg} border ${colors.border} transition-all duration-200 hover:scale-105 hover:shadow-lg`}
+        >
+            <span className={colors.text}>{name}</span>
         </motion.div>
     );
 };
@@ -141,7 +156,7 @@ export default function About() {
                 >
                     <h3 className="h-medium text-charcoal dark:text-cream">Research Interests</h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        {['Federated Learning', 'Distributed Systems', 'Model Compression', 'Efficiency', 'Systems ML', 'Scalable Training'].map((interest, idx) => (
+                        {['Reinforcement Learning', 'Federated Learning', 'Post Training in LLMs', 'Quantization Techniques', 'ML for Systems', 'Scalable Training'].map((interest, idx) => (
                             <motion.div
                                 key={interest}
                                 initial={{ opacity: 0, scale: 0.95 }}
@@ -197,46 +212,36 @@ export default function About() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="space-y-8"
+                    transition={{ duration: 0.6 }}
+                    className="space-y-6"
                 >
                     <h3 className="h-medium text-charcoal dark:text-cream">Skills & Expertise</h3>
 
-                    <div className="space-y-8">
-                        {skillCategories.map((skillGroup, groupIdx) => (
-                            <motion.div
-                                key={skillGroup.category}
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: groupIdx * 0.15 }}
-                                className="space-y-4 p-6 bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-lg"
-                            >
-                                <h4 className="font-semibold text-charcoal dark:text-cream text-lg">{skillGroup.category}</h4>
-                                <div className="space-y-4">
-                                    {skillGroup.skills.map((skill, idx) => (
-                                        <SkillBar key={skill.name} name={skill.name} level={skill.level} />
-                                    ))}
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </motion.div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {skillCategories.map((skillGroup, groupIdx) => {
+                            const categoryName = skillGroup.category as keyof typeof categoryColors;
+                            const colors = categoryColors[categoryName] || categoryColors['Core Areas'];
 
-                {/* Technical Stack */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="space-y-3"
-                >
-                    <h3 className="h-medium text-charcoal dark:text-cream">Technical Stack</h3>
-                    <div className="space-y-2 text-sm text-slate dark:text-gray-400">
-                        <p>• Languages: Python, C++, Rust, TypeScript</p>
-                        <p>• Frameworks: PyTorch, TensorFlow, JAX</p>
-                        <p>• Infrastructure: Kubernetes, Docker, gRPC</p>
-                        <p>• Tools: Git, Weights & Biases, Ray, CUDA</p>
+                            return (
+                                <motion.div
+                                    key={skillGroup.category}
+                                    initial={{ opacity: 0, y: 15 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: groupIdx * 0.1 }}
+                                    className={`p-4 rounded-lg border ${colors.border} ${colors.bg} backdrop-blur-sm transition-all duration-300 hover:shadow-md`}
+                                >
+                                    <h4 className={`text-sm font-bold ${colors.text} mb-3 uppercase tracking-wider opacity-90`}>
+                                        {skillGroup.category}
+                                    </h4>
+                                    <div className="flex flex-wrap gap-2">
+                                        {skillGroup.skills.map((skill) => (
+                                            <SkillTag key={skill.name} name={skill.name} categoryColor={categoryName} />
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </motion.div>
             </motion.div>
