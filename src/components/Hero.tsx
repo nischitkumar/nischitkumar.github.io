@@ -36,7 +36,7 @@ export default function Hero() {
                 </motion.div>
 
                 <motion.p variants={item} className="body-lg max-w-2xl">
-                    Passionate about building scalable and intelligent systems. Currently exploring the areas of Reinforcement Learning and Language Models.
+                    Passionate about building scalable and intelligent systems.
                 </motion.p>
 
                 <motion.div variants={item} className="flex flex-wrap gap-4 pt-8">

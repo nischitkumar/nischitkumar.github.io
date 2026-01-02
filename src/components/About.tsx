@@ -94,7 +94,7 @@ export default function About() {
                 <h2 className="h-large text-charcoal dark:text-cream">About</h2>
 
                 <motion.div className="space-y-6 text-slate dark:text-gray-300 leading-relaxed">
-                    <p className="body-lg"> I’m passionate about exploring the areas of <b>Reinforcement Learning</b>, <b>ML for Systems</b> and <b>Language Models</b>. I’m interested in RL algorithms, its applications, and designing efficient systems within hardware limits.</p>
+                    <p className="body-lg"> I’m currently exploring the areas of <b>Reinforcement Learning</b>, <b>ML for Systems</b> and <b>Language Models</b>. I’m interested in RL algorithms, its applications, and designing efficient systems within hardware limits.</p>
 
                     <p className="body-lg"> I reckon the next frontier of AI isn't found in larger models, but in <b>interdisciplinary systems</b> that manage resources more intelligently. My goal is to contribute to a future where AI is accessible and sustainable, even in resource constrained environments. </p>
 

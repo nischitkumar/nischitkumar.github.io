@@ -8,7 +8,7 @@ const projects = [
         id: 1,
         title: 'Twin Delayed DDPG (TD3) Implementation',
         description: 'Implemented TD3 in PyTorch within the Hopper-v5 environment to address systematic overestimation bias by integrating Clipped Double Q-Learning and Target Policy Smoothing.',
-        impact: 'Achieved up to ~25–35% higher peak reward and substantially more stable learning dynamics compared to baseline DDPG.',
+        impact: 'Achieved up to 25 – 35% higher peak reward and substantially more stable learning dynamics compared to baseline DDPG.',
         tech: ['PyTorch', 'Gymnasium/Hopper-v5', 'Reinforcement Learning', 'Python'],
         links: {
             github: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/TD3',
@@ -19,7 +19,7 @@ const projects = [
         id: 2,
         title: 'Proximal Policy Optimization Implementation',
         description: 'Implemented PPO in PyTorch within the Cartpole-v1 environment. Addressed policy gradient variance by integrating clipped objective functions and adaptive KL divergence penalties.',
-        impact: 'Achieved stable learning performance with an average episode reward consistently around ~9.5 – 9.7 over 300+ episodes using ε = 0.2 clipping and λ = 0.95.',
+        impact: 'Achieved stable learning performance with an average episode reward consistently around 9.5 – 9.7 over 300+ episodes using ε = 0.2 clipping and λ = 0.95.',
         tech: ['PyTorch', 'Python', 'MNIST'],
         links: {
             github: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/PPO', // Link inferred from your snippet
@@ -30,7 +30,7 @@ const projects = [
         id: 3,
         title: 'Generative Adversarial Networks Implementation',
         description: 'Implemented a GAN from scratch in PyTorch, drawing insights from the original research paper. Trained and fine-tuned the model on the MNIST dataset.',
-        impact: 'Achieved stable GAN training with ~50% reduction in discriminator loss (from ~1.03 to ~0.51) and ~68% improvement in generator objective (increase from ~0.94 to ~1.58), which produced realistic handwritten digits.',
+        impact: 'Achieved stable GAN training with ~50% reduction in discriminator loss (from 1.03 to 0.51) and ~68% improvement in generator objective (increase from 0.94 to 1.58), which produced realistic handwritten digits.',
         tech: ['PyTorch', 'Python', 'MNIST'],
         links: {
             github: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/GAN', // Link inferred from your snippet
