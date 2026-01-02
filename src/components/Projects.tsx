@@ -6,38 +6,46 @@ import ProjectCard from './ProjectCard';
 const projects = [
     {
         id: 1,
-        title: 'ML Training Framework',
-        description: 'Distributed training framework for large-scale model training.',
-        impact: '2.5x speedup on 128 GPUs',
-        tech: ['PyTorch', 'CUDA', 'Distributed Systems'],
+        title: 'Twin Delayed DDPG (TD3) Implementation',
+        description: 'Implemented TD3 in PyTorch within the Hopper-v5 environment to address systematic overestimation bias by integrating Clipped Double Q-Learning and Target Policy Smoothing.',
+        impact: 'Achieved up to ~25–35% higher peak reward and substantially more stable learning dynamics compared to baseline DDPG.',
+        tech: ['PyTorch', 'Gymnasium/Hopper-v5', 'Reinforcement Learning', 'Python'],
         links: {
-            github: '#',
-            demo: '#',
-            paper: '#',
+            github: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/TD3',
+            paper: 'https://arxiv.org/abs/1802.09477',
         },
     },
     {
         id: 2,
-        title: 'Model Compression Toolkit',
-        description: 'End-to-end toolkit for neural network pruning and quantization.',
-        impact: '80% parameter reduction, 95% accuracy retention',
-        tech: ['TensorFlow', 'Python', 'ONNX'],
+        title: 'Proximal Policy Optimization Implementation',
+        description: 'Implemented PPO in PyTorch within the Cartpole-v1 environment. Addressed policy gradient variance by integrating clipped objective functions and adaptive KL divergence penalties.',
+        impact: 'Achieved stable learning performance with an average episode reward consistently around ~9.5 – 9.7 over 300+ episodes using ε = 0.2 clipping and λ = 0.95.',
+        tech: ['PyTorch', 'Python', 'MNIST'],
         links: {
-            github: '#',
-            paper: '#',
-            demo: '#',
+            github: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/PPO', // Link inferred from your snippet
+            paper: 'https://arxiv.org/abs/1707.06347',
         },
     },
     {
         id: 3,
-        title: 'Federated Learning Platform',
-        description: 'Privacy-preserving federated learning infrastructure.',
-        impact: 'Deployed across 50+ edge devices',
-        tech: ['TensorFlow Federated', 'gRPC', 'Kubernetes'],
+        title: 'Generative Adversarial Networks Implementation',
+        description: 'Implemented a GAN from scratch in PyTorch, drawing insights from the original research paper. Trained and fine-tuned the model on the MNIST dataset.',
+        impact: 'Achieved stable GAN training with ~50% reduction in discriminator loss (from ~1.03 to ~0.51) and ~68% improvement in generator objective (increase from ~0.94 to ~1.58), which produced realistic handwritten digits.',
+        tech: ['PyTorch', 'Python', 'MNIST'],
         links: {
-            github: '#',
-            paper: '#',
-            demo: '#',
+            github: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/GAN', // Link inferred from your snippet
+            paper: 'https://arxiv.org/abs/1406.2661',
+        },
+    },
+    {
+        id: 4,
+        title: 'Variational AutoEncoder Implementation',
+        description: 'Implemented a VAE from scratch in PyTorch by going through the original research paper accompanied by additional resources and used the MNIST dataset to train the model.',
+        impact: 'Achieved stable convergence, with the Avg loss reducing by ~39%, and Reconstruction loss improving by ~46%, indicating a meaningful latent space for digit reconstruction.',
+        tech: ['PyTorch', 'Python', 'MNIST'],
+        links: {
+            github: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/VAE',
+            paper: 'https://arxiv.org/abs/1312.6114',
         },
     },
 ];
@@ -50,9 +58,6 @@ export default function Projects() {
             >
                 <div className="space-y-4">
                     <h2 className="h-large text-charcoal dark:text-cream">Projects</h2>
-                    <p className="body-lg max-w-2xl">
-                        Practical applications and tools built to solve real problems.
-                    </p>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">

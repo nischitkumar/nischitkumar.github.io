@@ -94,16 +94,12 @@ export default function About() {
                 <h2 className="h-large text-charcoal dark:text-cream">About</h2>
 
                 <motion.div className="space-y-6 text-slate dark:text-gray-300 leading-relaxed">
-                    <p className="body-lg">
-                        I'm a machine learning researcher deeply interested in the intersection of systems design and intelligent algorithms. My work focuses on building scalable, efficient, and practical ML systems that can operate at scale.
-                    </p>
+                    <p className="body-lg"> I’m passionate about exploring the areas of <b>Reinforcement Learning</b>, <b>ML for Systems</b> and <b>Language Models</b>. I’m interested in RL algorithms, its applications, and designing efficient systems within hardware limits.</p>
+
+                    <p className="body-lg"> I reckon the next frontier of AI isn't found in larger models, but in <b>interdisciplinary systems</b> that manage resources more intelligently. My goal is to contribute to a future where AI is accessible and sustainable, even in resource constrained environments. </p>
 
                     <p className="body-lg">
-                        Currently, I'm exploring how we can make machine learning more accessible and efficient, particularly in resource-constrained environments. I believe the next frontier of ML lies not just in better algorithms, but in systems that intelligently manage computation, communication, and memory.
-                    </p>
-
-                    <p className="body-lg">
-                        When not researching, I enjoy writing about ML concepts, contributing to open-source projects, and mentoring junior researchers.
+                        Beyond academics, I enjoy reading about tech and sports, listening to music, playing Cricket and Basketball, and staying curious.
                     </p>
                 </motion.div>
 
@@ -152,7 +148,7 @@ export default function About() {
                 >
                     <h3 className="h-medium text-charcoal dark:text-cream">Research Interests</h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        {['Reinforcement Learning', 'Federated Learning', 'Post Training in LLMs', 'Quantization Techniques', 'ML for Systems', 'Scalable Training'].map((interest, idx) => (
+                        {['Reinforcement Learning', 'Federated Learning', 'Post Training Optimization in LLMs', 'Quantization Techniques', 'ML for Systems', 'Scalable Training'].map((interest, idx) => (
                             <motion.div
                                 key={interest}
                                 initial={{ opacity: 0 }}

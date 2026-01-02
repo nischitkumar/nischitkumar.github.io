@@ -8,9 +8,9 @@ const experiences = [
         organization: 'Indian Institute Of Management Bangalore',
         duration: 'Oct 2025 - Present',
         description:
-            'Working on optimizing the Traveling Thief problem (TTP) using Deep Reinforcement Learning (DRL) and similar Combinatorial Optimization techniques.',
+            'Working on optimizing the Traveling Thief problem (TTP) using DRL (PPO and SAC) and similar Combinatorial Optimization (POMO) techniques.',
         highlights: [
-            'Optimizing TTP using Deep Reinforcement Learning',
+            'Optimizing TTP using DRL (PPO and SAC)',
             'Supervised by Dr. Abhay Sobhanan',
         ],
     },
@@ -19,10 +19,9 @@ const experiences = [
         organization: 'Data, Systems and High Performance Computing (DaSH) Lab',
         duration: 'Sept 2024 - Present',
         description:
-            'Focusing on the systems side of homomorphic encryption in Federated Learning (FL) and integrating RSPNs for data pipeline optimization.',
+            'Working on Privacy Preserving Federated Learning, keeping model training weights encrypted using Homomorphic Encryption (HE) and Differential Privacy (DP), while tuning privacy parameters to maintain high accuracy across internal FL workflows.',
         highlights: [
-            'Integrated Relational Sum Product Networks (RSPN) in C++',
-            'Benchmarking performance and studying Mutable DB’s codebase',
+            'Integrated Relational Sum Product Networks (RSPN) pipeline in C++ and studied Mutable DB’s codebase',
             'Supervised by Dr. Arnab K. Paul',
         ],
     },
@@ -30,10 +29,9 @@ const experiences = [
         role: 'Undergraduate Researcher',
         organization: 'APPCAIR',
         duration: 'Sept 2025 - Nov 2025',
-        description: 'Collaborated with University of Cambridge to optimize an LLM based generator for designing lead molecules in drug discovery.',
+        description: 'Collaborated with University of Cambridge to optimize an LLM based generator for designing lead molecules in drug discovery using various graph search algorithms.',
         highlights: [
-            'LLM-based generator for drug discovery',
-            'International collaboration with University of Cambridge',
+            'Collaboration with University of Cambridge',
             'Supervised by Dr. Ashwin Srinivasan, Dr. Tirtharaj Dash, and Dr. Raviprasad Aduri',
         ],
     },
@@ -46,10 +44,8 @@ export default function Experience() {
                 className="space-y-12"
             >
                 <div className="space-y-4">
-                    <h2 className="h-large text-charcoal dark:text-cream">Experience</h2>
-                    <p className="body-lg max-w-2xl">
-                        Professional journey in machine learning research and engineering.
-                    </p>
+                    <h2 className="h-large text-charcoal dark:text-cream">Experiences</h2>
+
                 </div>
 
                 <div className="space-y-4">
