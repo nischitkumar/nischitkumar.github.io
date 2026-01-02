@@ -61,10 +61,7 @@ export default function Research() {
     return (
         <section id="research" className="section-container">
             <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
+
                 className="space-y-12"
             >
                 <div className="space-y-4">
@@ -107,10 +104,10 @@ export default function Research() {
                         {filteredPapers.map((paper, idx) => (
                             <motion.div
                                 key={paper.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ delay: idx * 0.1 }}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ delay: idx * 0.03, duration: 0.2 }}
                             >
                                 <ResearchCard paper={paper} />
                             </motion.div>

@@ -74,11 +74,11 @@ const SkillTag = ({ name, categoryColor }: { name: string; categoryColor: keyof 
 
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.3 }}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium ${colors.bg} border ${colors.border} transition-all duration-200 hover:scale-105 hover:shadow-lg`}
+            transition={{ duration: 0.2 }}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium ${colors.bg} border ${colors.border} transition-all duration-200 hover:shadow-lg`}
         >
             <span className={colors.text}>{name}</span>
         </motion.div>
@@ -89,10 +89,6 @@ export default function About() {
     return (
         <section id="about" className="section-container">
             <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
                 className="max-w-3xl space-y-12"
             >
                 <h2 className="h-large text-charcoal dark:text-cream">About</h2>
@@ -113,20 +109,20 @@ export default function About() {
 
                 {/* Research Interests */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+                    transition={{ duration: 0.4 }}
                     className="space-y-3"
                 >
                 </motion.div>
 
                 {/* University Coursework */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.1 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+                    transition={{ duration: 0.4 }}
                     className="space-y-4"
                 >
                     <h3 className="h-medium text-charcoal dark:text-cream">University Coursework</h3>
@@ -134,10 +130,10 @@ export default function About() {
                         {coursework.map((course, idx) => (
                             <motion.div
                                 key={course}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true, margin: '0px 0px -50px 0px' }}
+                                transition={{ duration: 0.3, delay: idx * 0.02 }}
                                 className="p-3 bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-lg hover:border-accent/50 dark:hover:border-blue-500/50 transition-all"
                             >
                                 <p className="text-sm font-medium text-charcoal dark:text-cream">{course}</p>
@@ -148,10 +144,10 @@ export default function About() {
 
                 {/* Online Coursework */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+                    transition={{ duration: 0.4 }}
                     className="space-y-4"
                 >
                     <h3 className="h-medium text-charcoal dark:text-cream">Research Interests</h3>
@@ -159,10 +155,10 @@ export default function About() {
                         {['Reinforcement Learning', 'Federated Learning', 'Post Training in LLMs', 'Quantization Techniques', 'ML for Systems', 'Scalable Training'].map((interest, idx) => (
                             <motion.div
                                 key={interest}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true, margin: '0px 0px -50px 0px' }}
+                                transition={{ duration: 0.3, delay: idx * 0.02 }}
                                 className="p-3 bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-lg hover:border-accent/50 dark:hover:border-blue-500/50 transition-all group"
                             >
                                 <p className="text-sm font-medium text-charcoal dark:text-cream group-hover:text-accent dark:group-hover:text-blue-400 transition-colors text-center">{interest}</p>
@@ -173,10 +169,10 @@ export default function About() {
 
                 {/* Online Coursework & Certifications */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.25 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+                    transition={{ duration: 0.4 }}
                     className="space-y-4"
                 >
                     <h3 className="h-medium text-charcoal dark:text-cream">Online Coursework & Certifications</h3>
@@ -184,10 +180,10 @@ export default function About() {
                         {onlineCoursework.map((course, idx) => (
                             <motion.div
                                 key={course.name}
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: idx * 0.06 }}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true, margin: '0px 0px -50px 0px' }}
+                                transition={{ duration: 0.3, delay: idx * 0.02 }}
                                 className="p-4 bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-lg hover:border-accent/50 dark:hover:border-blue-500/50 transition-all group"
                             >
                                 <div className="flex items-start justify-between">
@@ -209,10 +205,10 @@ export default function About() {
 
                 {/* Skills Section */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+                    transition={{ duration: 0.4 }}
                     className="space-y-6"
                 >
                     <h3 className="h-medium text-charcoal dark:text-cream">Skills & Expertise</h3>
@@ -225,10 +221,10 @@ export default function About() {
                             return (
                                 <motion.div
                                     key={skillGroup.category}
-                                    initial={{ opacity: 0, y: 15 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: groupIdx * 0.1 }}
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true, margin: '0px 0px -50px 0px' }}
+                                    transition={{ duration: 0.3, delay: groupIdx * 0.05 }}
                                     className={`p-4 rounded-lg border ${colors.border} ${colors.bg} backdrop-blur-sm transition-all duration-300 hover:shadow-md`}
                                 >
                                     <h4 className={`text-sm font-bold ${colors.text} mb-3 uppercase tracking-wider opacity-90`}>

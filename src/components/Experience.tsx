@@ -43,10 +43,6 @@ export default function Experience() {
     return (
         <section id="experience" className="section-container">
             <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
                 className="space-y-12"
             >
                 <div className="space-y-4">
@@ -60,10 +56,10 @@ export default function Experience() {
                     {experiences.map((exp, idx) => (
                         <motion.div
                             key={idx}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: idx * 0.15, duration: 0.6 }}
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+                            transition={{ delay: idx * 0.08, duration: 0.4 }}
                             className="group p-6 bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-lg hover:border-accent/50 dark:hover:border-blue-500/50 transition-all duration-300 relative overflow-hidden"
                         >
                             {/* Subtle top accent bar */}

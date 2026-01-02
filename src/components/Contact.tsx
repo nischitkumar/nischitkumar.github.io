@@ -14,10 +14,6 @@ export default function Contact() {
     return (
         <section id="contact" className="section-container">
             <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
                 className="max-w-2xl mx-auto space-y-12"
             >
                 <div className="space-y-4 text-center">
@@ -36,10 +32,10 @@ export default function Contact() {
                                 href={link.href}
                                 target={link.href.startsWith('http') ? '_blank' : undefined}
                                 rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.1 }}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true, margin: '0px 0px -50px 0px' }}
+                                transition={{ delay: idx * 0.04, duration: 0.2 }}
                                 whileHover={{ x: 4 }}
                                 className="p-6 bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-lg hover:border-accent/50 dark:hover:border-blue-500/50 transition-all group"
                             >
