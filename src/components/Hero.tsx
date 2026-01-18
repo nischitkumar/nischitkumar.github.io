@@ -1,80 +1,135 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Download } from 'lucide-react';
+import { ArrowRight, Download, Sparkles } from 'lucide-react';
 
 const container = {
     hidden: { opacity: 0 },
     show: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.08,
-            delayChildren: 0.1,
+            staggerChildren: 0.1,
+            delayChildren: 0.2,
         },
     },
 };
 
 const item = {
-    hidden: { opacity: 0, y: 8 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+    hidden: { opacity: 0, y: 30 },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.8,
+            ease: [0.16, 1, 0.3, 1]
+        }
+    },
 };
 
 export default function Hero() {
     return (
-        <section id="home" className="section-container pt-32 md:pt-40">
-            <motion.div
-                variants={container}
-                initial="hidden"
-                animate="show"
-                className="space-y-8"
-            >
-                <motion.div variants={item} className="space-y-4">
-                    <h1 className="h-display text-charcoal dark:text-cream">Nischit Kumar</h1>
-                    <p className="h-medium text-slate dark:text-gray-300 max-w-2xl">
-                        Aspiring Machine Learning Researcher
-                    </p>
-                </motion.div>
+        <section id="home" className="relative min-h-screen flex items-center">
+            {/* Hero content */}
+            <div className="section-wrapper pt-32 pb-20 md:pt-40 md:pb-32">
+                <motion.div
+                    variants={container}
+                    initial="hidden"
+                    animate="show"
+                    className="max-w-4xl"
+                >
+                    {/* Status badge */}
+                    <motion.div variants={item} className="mb-8">
+                        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-primary/10 border border-accent-primary/20 text-accent-primary text-sm font-medium">
+                            <Sparkles size={14} className="animate-pulse" />
+                            Open to Research Opportunities
+                        </span>
+                    </motion.div>
 
-                <motion.p variants={item} className="body-lg max-w-2xl">
-                    Passionate about building scalable and intelligent systems.
-                </motion.p>
+                    {/* Main heading */}
+                    <motion.div variants={item} className="space-y-4 mb-8">
+                        <h1 className="text-display text-text-primary dark:text-text-primary">
+                            Nischit Kumar
+                        </h1>
+                        <p className="text-headline text-text-secondary dark:text-text-secondary max-w-2xl">
+                            Aspiring{' '}
+                            <span className="gradient-text">Machine Learning</span>{' '}
+                            Researcher
+                        </p>
+                    </motion.div>
 
-                <motion.div variants={item} className="flex flex-wrap gap-4 pt-8">
-                    <div className="w-full space-y-2">
-                        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2 md:gap-0">
-                            <p className="text-base font-serif text-charcoal dark:text-cream">
-                                <span className="font-bold">Birla Institute Of Technology And Science, Pilani - Goa Campus</span>
-                            </p>
-                            <p className="text-base font-serif text-charcoal dark:text-cream italic">Aug 2023 - Jun 2028</p>
-                        </div>
-                        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2 md:gap-0">
-                            <div className="space-y-1">
-                                <p className="text-sm text-charcoal dark:text-gray-300">Bachelors of Engineering (Hons) in Electronics and Communication</p>
-                                <p className="text-sm text-charcoal dark:text-gray-300">Masters in Economics</p>
+                    {/* Description */}
+                    <motion.p
+                        variants={item}
+                        className="text-body text-text-secondary dark:text-text-secondary max-w-2xl mb-12"
+                    >
+                        Passionate about building scalable and intelligent systems.
+                    </motion.p>
+
+                    {/* Education info */}
+                    <motion.div
+                        variants={item}
+                        className="glass-card p-6 max-w-2xl mb-12"
+                    >
+                        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+                            <div className="space-y-2">
+                                <p className="text-subtitle text-text-primary dark:text-text-primary font-semibold">
+                                    BITS Pilani - Goa Campus
+                                </p>
+                                <div className="space-y-1">
+                                    <p className="text-small text-text-secondary dark:text-text-secondary">
+                                        B.E. (Hons) Electronics and Communication
+                                    </p>
+                                    <p className="text-small text-text-secondary dark:text-text-secondary">
+                                        M.Sc. Economics
+                                    </p>
+                                </div>
                             </div>
-                            <p className="text-sm text-charcoal dark:text-gray-300 italic">Goa, India</p>
+                            <div className="text-right space-y-1">
+                                <span className="tag tag-accent">Aug 2023 - Jun 2028</span>
+                                <p className="text-small text-text-muted dark:text-text-muted">Goa, India</p>
+                            </div>
                         </div>
-                    </div>
-                </motion.div>
+                    </motion.div>
 
-                <motion.div variants={item} className="flex flex-wrap gap-4 pt-8">
-                    <motion.a
-                        href="#about"
-                        className="premium-button bg-charcoal text-cream dark:bg-cream dark:text-charcoal flex items-center gap-2"
-                        whileHover={{ backgroundColor: '#0F0F0F' }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        View Profile <ArrowRight size={16} />
-                    </motion.a>
-                    <motion.a
-                        href="/cv.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="premium-button bg-white dark:bg-gray-800 border border-charcoal dark:border-gray-600 text-charcoal dark:text-cream flex items-center gap-2 hover:bg-charcoal dark:hover:bg-gray-700 hover:text-cream dark:hover:text-charcoal"
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        Download CV <Download size={16} />
-                    </motion.a>
+                    {/* CTA buttons */}
+                    <motion.div variants={item} className="flex flex-wrap gap-4">
+                        <motion.a
+                            href="#about"
+                            className="btn-primary flex items-center gap-2"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            Explore My Work
+                            <ArrowRight size={16} />
+                        </motion.a>
+                        <motion.a
+                            href="/cv.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-secondary flex items-center gap-2"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            <Download size={16} />
+                            Download CV
+                        </motion.a>
+                    </motion.div>
+                </motion.div>
+            </div>
+
+            {/* Scroll indicator */}
+            <motion.div
+                className="absolute bottom-10 left-1/2 -translate-x-1/2"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.5, duration: 0.6 }}
+            >
+                <motion.div
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-2"
+                >
+                    <motion.div className="w-1 h-2 bg-accent-primary rounded-full" />
                 </motion.div>
             </motion.div>
         </section>

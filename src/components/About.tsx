@@ -5,237 +5,241 @@ import { motion } from 'framer-motion';
 const skillCategories = [
     {
         category: 'Core Areas',
-        skills: [
-            { name: 'Deep Learning' },
-            { name: 'NLP & Transformers' },
-            { name: 'Federated Learning' },
-            { name: 'Reinforcement Learning' },
-            { name: 'Optimization of LLMs' },
-        ],
+        color: 'blue',
+        skills: ['Deep Learning', 'NLP & Transformers', 'Federated Learning', 'Reinforcement Learning', 'LLM Optimization'],
     },
     {
-        category: 'Systems & Infrastructure',
-        skills: [
-            { name: 'Docker', level: 88 },
-            { name: 'Ray Engine', level: 85 },
-        ],
+        category: 'Systems',
+        color: 'violet',
+        skills: ['Docker', 'Ray Engine'],
     },
     {
-        category: 'Programming Languages',
-        skills: [
-            { name: 'Python' },
-            { name: 'C/C++' },
-            { name: 'MySQL' },
-        ],
+        category: 'Languages',
+        color: 'emerald',
+        skills: ['Python', 'C/C++', 'MySQL'],
     },
     {
         category: 'Frameworks',
-        skills: [
-            { name: 'PyTorch' },
-            { name: 'TensorFlow' },
-        ],
+        color: 'orange',
+        skills: ['PyTorch', 'TensorFlow'],
     },
     {
         category: 'Tools',
-        skills: [
-            { name: 'Git/Github' },
-            { name: 'Weights & Biases' },
-        ],
+        color: 'rose',
+        skills: ['Git/GitHub', 'Weights & Biases'],
     },
 ];
+
 const coursework = [
-    'Linear Algebra',
-    'Probability & Statistics',
-    'Differential Equations',
-    'Control Theory',
-    'Computer Programming',
-    'Digital Design',
-    'Operating Systems',
-    'Econometric Methods'
+    'Linear Algebra', 'Probability & Statistics', 'Differential Equations', 'Control Theory',
+    'Computer Programming', 'Digital Design', 'Operating Systems', 'Econometric Methods'
 ];
 
-const onlineCoursework = [
-    { name: 'Stanford CS224R: Deep Reinforcement Learning', platform: 'Stanford University [YouTube]' },
+const researchInterests = [
+    'Reinforcement Learning', 'Federated Learning', 'Post Training Optimization',
+    'Quantization Techniques', 'ML for Systems', 'Scalable Training'
+];
+
+const onlineCourses = [
+    { name: 'Stanford CS224R: Deep Reinforcement Learning', platform: 'Stanford [YouTube]' },
     { name: 'Andrew Ng: Deep Learning Specialization', platform: 'Coursera' },
     { name: 'Foundations of Machine Learning', platform: 'Udemy' },
     { name: 'Computer Networks', platform: 'YouTube' },
 ];
 
-const categoryColors = {
-    'Core Areas': { bg: 'bg-accent/10 dark:bg-blue-500/10', border: 'border-accent/30 dark:border-blue-500/30', text: 'text-accent dark:text-blue-400' },
-    'Systems & Infrastructure': { bg: 'bg-purple-500/10 dark:bg-purple-500/10', border: 'border-purple-500/30 dark:border-purple-500/30', text: 'text-purple-600 dark:text-purple-400' },
-    'Programming Languages': { bg: 'bg-emerald-500/10 dark:bg-emerald-500/10', border: 'border-emerald-500/30 dark:border-emerald-500/30', text: 'text-emerald-600 dark:text-emerald-400' },
-    'Frameworks': { bg: 'bg-orange-500/10 dark:bg-orange-500/10', border: 'border-orange-500/30 dark:border-orange-500/30', text: 'text-orange-600 dark:text-orange-400' },
-    'Tools': { bg: 'bg-rose-500/10 dark:bg-rose-500/10', border: 'border-rose-500/30 dark:border-rose-500/30', text: 'text-rose-600 dark:text-rose-400' },
+const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: { staggerChildren: 0.05 }
+    }
 };
 
-const SkillTag = ({ name, categoryColor }: { name: string; categoryColor: keyof typeof categoryColors }) => {
-    const colors = categoryColors[categoryColor] || categoryColors['Core Areas'];
-
-    return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.2 }}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium ${colors.bg} border ${colors.border} transition-all duration-200 hover:shadow-lg`}
-        >
-            <span className={colors.text}>{name}</span>
-        </motion.div>
-    );
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }
 };
 
 export default function About() {
     return (
-        <section id="about" className="section-container">
+        <section id="about" className="section-wrapper section-padding">
             <motion.div
-                className="max-w-3xl space-y-12"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.6 }}
+                className="space-y-20"
             >
-                <h2 className="h-large text-charcoal dark:text-cream">About</h2>
+                {/* Section header */}
+                <div className="max-w-3xl">
+                    <motion.span
+                        className="text-label text-accent-primary mb-4 block"
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        About Me
+                    </motion.span>
+                    <motion.h2
+                        className="text-headline text-text-primary dark:text-text-primary mb-8"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                    >
+                        Building the future of
+                        <span className="gradient-text"> intelligent systems</span>
+                    </motion.h2>
 
-                <motion.div className="space-y-6 text-slate dark:text-gray-300 leading-relaxed">
-                    <p className="body-lg"> I’m currently exploring the areas of <b>Reinforcement Learning</b>, <b>ML for Systems</b> and <b>Language Models</b>. I’m interested in RL algorithms, its applications, and designing efficient systems within hardware limits.</p>
-
-                    <p className="body-lg"> I reckon the next frontier of AI isn't found in larger models, but in <b>interdisciplinary systems</b> that manage resources more intelligently. My goal is to contribute to a future where AI is accessible and sustainable, even in resource constrained environments. </p>
-
-                    <p className="body-lg">
-                        Beyond academics, I enjoy reading about tech and sports, listening to music, playing Cricket and Basketball, and staying curious.
-                    </p>
-                </motion.div>
+                    <motion.div
+                        className="space-y-6 text-body text-text-secondary dark:text-text-secondary"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                    >
+                        <p>
+                            I'm currently exploring <strong className="text-text-primary dark:text-text-primary">Reinforcement Learning</strong>,
+                            <strong className="text-text-primary dark:text-text-primary"> ML for Systems</strong>, and
+                            <strong className="text-text-primary dark:text-text-primary"> Language Models</strong>.
+                            I'm fascinated by RL algorithms, their applications, and designing efficient systems within hardware constraints.
+                        </p>
+                        <p>
+                            I believe the next frontier of AI isn't in larger models, but in
+                            <strong className="text-text-primary dark:text-text-primary"> interdisciplinary systems</strong> that
+                            manage resources intelligently. My goal is to contribute to accessible and sustainable AI.
+                        </p>
+                        <p className="text-text-muted dark:text-text-muted">
+                            Beyond academics, I enjoy reading about tech and sports, listening to music, playing Cricket and Basketball, and staying curious.
+                        </p>
+                    </motion.div>
+                </div>
 
                 {/* Research Interests */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: '0px 0px -100px 0px' }}
-                    transition={{ duration: 0.4 }}
-                    className="space-y-3"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 0.5 }}
+                    className="space-y-6"
                 >
-                </motion.div>
-
-                {/* University Coursework */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: '0px 0px -100px 0px' }}
-                    transition={{ duration: 0.4 }}
-                    className="space-y-4"
-                >
-                    <h3 className="h-medium text-charcoal dark:text-cream">University Coursework</h3>
-                    <div className="grid grid-cols-2 gap-3">
-                        {coursework.map((course, idx) => (
-                            <motion.div
-                                key={course}
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                viewport={{ once: true, margin: '0px 0px -50px 0px' }}
-                                transition={{ duration: 0.3, delay: idx * 0.02 }}
-                                className="p-3 bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-lg hover:border-accent/50 dark:hover:border-blue-500/50 transition-all"
-                            >
-                                <p className="text-sm font-medium text-charcoal dark:text-cream">{course}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </motion.div>
-
-                {/* Online Coursework */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: '0px 0px -100px 0px' }}
-                    transition={{ duration: 0.4 }}
-                    className="space-y-4"
-                >
-                    <h3 className="h-medium text-charcoal dark:text-cream">Research Interests</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        {['Reinforcement Learning', 'Federated Learning', 'Post Training Optimization in LLMs', 'Quantization Techniques', 'ML for Systems', 'Scalable Training'].map((interest, idx) => (
-                            <motion.div
+                    <h3 className="text-title text-text-primary dark:text-text-primary">Research Interests</h3>
+                    <motion.div
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true }}
+                        className="flex flex-wrap gap-3"
+                    >
+                        {researchInterests.map((interest) => (
+                            <motion.span
                                 key={interest}
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                viewport={{ once: true, margin: '0px 0px -50px 0px' }}
-                                transition={{ duration: 0.3, delay: idx * 0.02 }}
-                                className="p-3 bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-lg hover:border-accent/50 dark:hover:border-blue-500/50 transition-all group"
+                                variants={itemVariants}
+                                className="tag tag-accent"
+                                whileHover={{ scale: 1.05 }}
                             >
-                                <p className="text-sm font-medium text-charcoal dark:text-cream group-hover:text-accent dark:group-hover:text-blue-400 transition-colors text-center">{interest}</p>
-                            </motion.div>
+                                {interest}
+                            </motion.span>
                         ))}
-                    </div>
+                    </motion.div>
                 </motion.div>
 
-                {/* Online Coursework & Certifications */}
+                {/* Skills Section */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: '0px 0px -100px 0px' }}
-                    transition={{ duration: 0.4 }}
-                    className="space-y-4"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 0.5 }}
+                    className="space-y-8"
                 >
-                    <h3 className="h-medium text-charcoal dark:text-cream">Online Coursework & Certifications</h3>
-                    <div className="space-y-2">
-                        {onlineCoursework.map((course, idx) => (
+                    <h3 className="text-title text-text-primary dark:text-text-primary">Skills & Expertise</h3>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {skillCategories.map((category, idx) => (
                             <motion.div
-                                key={course.name}
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                viewport={{ once: true, margin: '0px 0px -50px 0px' }}
-                                transition={{ duration: 0.3, delay: idx * 0.02 }}
-                                className="p-4 bg-white/10 dark:bg-white/5 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-lg hover:border-accent/50 dark:hover:border-blue-500/50 transition-all group"
+                                key={category.category}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: idx * 0.05, duration: 0.4 }}
+                                className="glass-card p-5 card-hover"
                             >
-                                <div className="flex items-start justify-between">
-                                    <div className="flex-1">
-                                        <p className="text-sm font-medium text-charcoal dark:text-cream group-hover:text-accent dark:group-hover:text-blue-400 transition-colors">{course.name}</p>
-                                        <p className="text-xs text-slate dark:text-gray-400 mt-1">{course.platform}</p>
-                                    </div>
-                                    <motion.span
-                                        className="text-accent dark:text-blue-400 text-lg"
-                                        whileHover={{ scale: 1.2, rotate: 10 }}
-                                    >
-                                        ✓
-                                    </motion.span>
+                                <h4 className="text-label text-accent-primary mb-4">
+                                    {category.category}
+                                </h4>
+                                <div className="flex flex-wrap gap-2">
+                                    {category.skills.map((skill) => (
+                                        <span key={skill} className="tag">
+                                            {skill}
+                                        </span>
+                                    ))}
                                 </div>
                             </motion.div>
                         ))}
                     </div>
                 </motion.div>
 
-                {/* Skills Section */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: '0px 0px -100px 0px' }}
-                    transition={{ duration: 0.4 }}
-                    className="space-y-6"
-                >
-                    <h3 className="h-medium text-charcoal dark:text-cream">Skills & Expertise</h3>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {skillCategories.map((skillGroup, groupIdx) => {
-                            const categoryName = skillGroup.category as keyof typeof categoryColors;
-                            const colors = categoryColors[categoryName] || categoryColors['Core Areas'];
-
-                            return (
+                {/* Coursework Grid */}
+                <div className="grid md:grid-cols-2 gap-12">
+                    {/* University Coursework */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-50px' }}
+                        transition={{ duration: 0.5 }}
+                        className="space-y-6"
+                    >
+                        <h3 className="text-title text-text-primary dark:text-text-primary">University Coursework</h3>
+                        <div className="grid grid-cols-2 gap-3">
+                            {coursework.map((course, idx) => (
                                 <motion.div
-                                    key={skillGroup.category}
-                                    initial={{ opacity: 0 }}
-                                    whileInView={{ opacity: 1 }}
-                                    viewport={{ once: true, margin: '0px 0px -50px 0px' }}
-                                    transition={{ duration: 0.3, delay: groupIdx * 0.05 }}
-                                    className={`p-4 rounded-lg border ${colors.border} ${colors.bg} backdrop-blur-sm transition-all duration-300 hover:shadow-md`}
+                                    key={course}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.03, duration: 0.3 }}
+                                    className="glass-card p-4 card-hover"
                                 >
-                                    <h4 className={`text-sm font-bold ${colors.text} mb-3 uppercase tracking-wider opacity-90`}>
-                                        {skillGroup.category}
-                                    </h4>
-                                    <div className="flex flex-wrap gap-2">
-                                        {skillGroup.skills.map((skill) => (
-                                            <SkillTag key={skill.name} name={skill.name} categoryColor={categoryName} />
-                                        ))}
+                                    <p className="text-small text-text-primary dark:text-text-primary font-medium">{course}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </motion.div>
+
+                    {/* Online Courses */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-50px' }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="space-y-6"
+                    >
+                        <h3 className="text-title text-text-primary dark:text-text-primary">Online Certifications</h3>
+                        <div className="space-y-3">
+                            {onlineCourses.map((course, idx) => (
+                                <motion.div
+                                    key={course.name}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.05, duration: 0.4 }}
+                                    className="glass-card p-4 card-hover group"
+                                >
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex-1 pr-4">
+                                            <p className="text-small text-text-primary dark:text-text-primary font-medium group-hover:text-accent-primary transition-colors">
+                                                {course.name}
+                                            </p>
+                                            <p className="text-xs text-text-muted dark:text-text-muted mt-1">
+                                                {course.platform}
+                                            </p>
+                                        </div>
+                                        <span className="text-accent-primary text-lg">✓</span>
                                     </div>
                                 </motion.div>
-                            );
-                        })}
-                    </div>
-                </motion.div>
+                            ))}
+                        </div>
+                    </motion.div>
+                </div>
             </motion.div>
         </section>
     );

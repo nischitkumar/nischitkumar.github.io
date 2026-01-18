@@ -1,6 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Heart } from 'lucide-react';
+
+const footerLinks = [
+    { label: 'Home', href: '#home' },
+    { label: 'About', href: '#about' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Contact', href: '#contact' },
+];
 
 export default function Footer() {
     return (
@@ -8,38 +17,47 @@ export default function Footer() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="bg-charcoal dark:bg-gray-950 text-cream py-12"
+            className="relative border-t border-white/[0.06]"
         >
-            <div className="max-w-5xl mx-auto px-6 md:px-12 space-y-6 border-t border-white/10 pt-12">
+            {/* Gradient fade at top */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-primary/50 to-transparent" />
+
+            <div className="section-wrapper py-16">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-                    <div>
-                        <p className="font-display text-lg">NK</p>
-                        <p className="text-sm text-cream/60 mt-2">
+                    {/* Logo and tagline */}
+                    <div className="space-y-3">
+                        <motion.a
+                            href="#home"
+                            className="inline-block"
+                            whileHover={{ scale: 1.05 }}
+                        >
+                            <span className="text-2xl font-bold gradient-text">NK</span>
+                        </motion.a>
+                        <p className="text-small text-text-muted dark:text-text-muted max-w-xs">
                             Aspiring Machine Learning Researcher
                         </p>
                     </div>
 
-                    <div className="flex gap-8 text-sm">
-                        <a href="#about" className="hover:text-white transition-colors">
-                            About
-                        </a>
-                        <a href="#experience" className="hover:text-white transition-colors">
-                            Experience
-                        </a>
-                        <a href="#projects" className="hover:text-white transition-colors">
-                            Projects
-                        </a>
-                        {/* <a href="#research" className="hover:text-white transition-colors">
-                            Research
-                        </a> */}
-                        {/* <a href="#contact" className="hover:text-white transition-colors">
-                            Contact
-                        </a> */}
-                    </div>
+                    {/* Navigation */}
+                    <nav className="flex flex-wrap gap-6">
+                        {footerLinks.map((link) => (
+                            <motion.a
+                                key={link.href}
+                                href={link.href}
+                                className="text-small text-text-secondary dark:text-text-secondary hover:text-text-primary dark:hover:text-text-primary transition-colors"
+                                whileHover={{ y: -2 }}
+                            >
+                                {link.label}
+                            </motion.a>
+                        ))}
+                    </nav>
                 </div>
 
-                <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs text-cream/50">
-                    {/* <p>© 2026 Nischit Kumar. All rights reserved.</p> */}
+                {/* Bottom bar */}
+                <div className="mt-12 pt-8 border-t border-white/[0.06] flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-xs text-text-muted dark:text-text-muted">
+                        © {new Date().getFullYear()} All rights reserved
+                    </p>
                 </div>
             </div>
         </motion.footer>
