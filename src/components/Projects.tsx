@@ -1,133 +1,117 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import ProjectCard from './ProjectCard';
 
-const projects = [
+const current = [
     {
-        id: 1,
+        title: 'Router-Guided Expert Tiering for HBM+CXL MoE Inference',
+        period: 'Aug 2026 – Present',
+        summary: 'Predicting which experts a mixture-of-experts model will need next, so the right ones are already close to the GPU.',
+        details: [
+            'I profiled expert access patterns on OLMoE-1B-7B and Mixtral-8x7B under a 25% memory budget. OLMoE only reached 52.2% coverage while Mixtral reached 28.7%, which was the opposite of what I expected going in.',
+            "I'm now building a prefetch policy that looks one layer ahead. At a 2k-token window it gets 55 to 62% next-layer recall, and it turns out the real bottleneck is hiding the transfer time, not predicting more accurately.",
+        ],
+        tags: ['PyTorch', 'MoE inference', 'CXL'],
+    },
+    {
+        title: 'PyTorch Checkpoint Compression & Deduplication Engine',
+        period: 'Jun 2026 – Present',
+        summary: 'A drop-in tool that compresses and deduplicates PyTorch training checkpoints without touching the training code.',
+        details: [
+            'It hooks directly into the torch.distributed.checkpoint StorageWriter layer, so it works with an existing training pipeline as is.',
+            'The GPU side uses Triton for byte-plane transforms, paired with Rust for parallel BLAKE3 hashing and zstd compression. On Pythia-410M checkpoints that gets 3.13x compression at 1,142 MB/s, and every checkpoint round-trips bit for bit.',
+        ],
+        tags: ['Triton', 'Rust', 'Distributed training'],
+    },
+    {
+        title: 'Intrinsic Curiosity Module (ICM) with DQN',
+        period: 'Mar 2026',
+        summary: 'Added curiosity-driven exploration to a DQN agent so it learns faster with sparse rewards.',
+        details: [
+            'Built for the MuJoCo Hopper-v4 environment: I discretized the continuous action space into 27 bins and compressed the 11-dimensional state into a 64-dimensional latent using an MLP encoder.',
+            'The intrinsic rewards stabilized learning noticeably, taking the final moving average reward from 245.38, well above the single-frame baseline.',
+        ],
+        tags: ['Reinforcement learning', 'PyTorch', 'MuJoCo'],
+    },
+    {
+        title: 'Structured State Space Sequence (S4) Modeling',
+        period: 'Mar 2026',
+        summary: 'A from-scratch PyTorch implementation of S4D, tested on sequential CIFAR-10.',
+        details: [
+            'Used FFT-based convolutions to keep it efficient, then compared three discretization methods: bilinear, zero-order hold, and forward Euler. Adding magnitude clamping to the Euler method gave the fastest convergence and the best accuracy, 19.2% on a constrained version of the model.',
+            "I also wrote a second version using only NumPy and SciPy's L-BFGS-B optimizer, with no autograd, mostly to see if it could be done.",
+        ],
+        tags: ['Sequence modeling', 'NumPy', 'SciPy'],
+    },
+];
+
+const earlier = [
+    {
         title: 'Twin Delayed DDPG (TD3)',
-        description: 'Implemented TD3 in PyTorch within the Hopper-v5 environment to address systematic overestimation bias by integrating Clipped Double Q-Learning and Target Policy Smoothing.',
-        impact: '25-35% higher peak reward and substantially more stable learning dynamics compared to baseline DDPG.',
-        tech: ['PyTorch', 'Gymnasium', 'RL', 'Python'],
-        links: {
-            github: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/TD3',
-            paper: 'https://arxiv.org/abs/1802.09477',
-        },
-        featured: true,
+        summary: 'Implemented TD3 in the Hopper-v5 environment to fix the overestimation bias that plain DDPG suffers from.',
+        details: [
+            'Used clipped double Q-learning and target policy smoothing. That gave 25 to 35% higher peak reward and noticeably steadier training than the DDPG baseline.',
+        ],
+        tags: ['PyTorch', 'Reinforcement learning'],
+        links: [
+            { label: 'Code', href: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/TD3' },
+            { label: 'Paper', href: 'https://arxiv.org/abs/1802.09477' },
+        ],
     },
     {
-        id: 2,
-        title: 'Proximal Policy Optimization',
-        description: 'Implemented PPO in PyTorch within the Cartpole-v1 environment. Addressed policy gradient variance by integrating clipped objective functions and adaptive KL divergence penalties.',
-        impact: 'Stable learning with average episode reward around 9.5-9.7 over 300+ episodes using ε=0.2 clipping.',
-        tech: ['PyTorch', 'Python', 'RL'],
-        links: {
-            github: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/PPO',
-            paper: 'https://arxiv.org/abs/1707.06347',
-        },
-        featured: true,
+        title: 'Proximal Policy Optimization (PPO)',
+        summary: 'Implemented PPO for CartPole-v1 to get a feel for how clipped objectives control policy gradient variance.',
+        details: [
+            'A clipping value of 0.2 alongside an adaptive KL penalty kept training stable, averaging around 9.5 to 9.7 reward per episode over 300+ episodes.',
+        ],
+        tags: ['PyTorch', 'Reinforcement learning'],
+        links: [
+            { label: 'Code', href: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/PPO' },
+            { label: 'Paper', href: 'https://arxiv.org/abs/1707.06347' },
+        ],
     },
     {
-        id: 3,
-        title: 'Generative Adversarial Networks',
-        description: 'Implemented a GAN from scratch in PyTorch, drawing insights from the original research paper. Trained and fine-tuned the model on the MNIST dataset.',
-        impact: '~50% reduction in discriminator loss and ~68% improvement in generator objective.',
-        tech: ['PyTorch', 'Python', 'MNIST'],
-        links: {
-            github: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/GAN',
-            paper: 'https://arxiv.org/abs/1406.2661',
-        },
-        featured: false,
+        title: 'Generative Adversarial Network',
+        summary: 'Built a GAN from scratch and trained it on MNIST.',
+        details: [
+            "Discriminator loss dropped by about 50% and the generator's objective improved by about 68% over the course of training.",
+        ],
+        tags: ['PyTorch', 'MNIST'],
+        links: [
+            { label: 'Code', href: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/GAN' },
+            { label: 'Paper', href: 'https://arxiv.org/abs/1406.2661' },
+        ],
     },
     {
-        id: 4,
-        title: 'Variational AutoEncoder',
-        description: 'Implemented a VAE from scratch in PyTorch by studying the original research paper. Used the MNIST dataset to train and validate the model.',
-        impact: 'Avg loss reduced by ~39%, Reconstruction loss improved by ~46%.',
-        tech: ['PyTorch', 'Python', 'MNIST'],
-        links: {
-            github: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/VAE',
-            paper: 'https://arxiv.org/abs/1312.6114',
-        },
-        featured: false,
+        title: 'Variational Autoencoder',
+        summary: 'Built a VAE from scratch, also trained and validated on MNIST.',
+        details: ['Average loss fell by about 39%, and reconstruction loss specifically improved by about 46%.'],
+        tags: ['PyTorch', 'MNIST'],
+        links: [
+            { label: 'Code', href: 'https://github.com/nischitkumar/Paper-Implementations/tree/main/VAE' },
+            { label: 'Paper', href: 'https://arxiv.org/abs/1312.6114' },
+        ],
     },
 ];
 
 export default function Projects() {
-    const featuredProjects = projects.filter(p => p.featured);
-    const otherProjects = projects.filter(p => !p.featured);
-
     return (
-        <section id="projects" className="section-wrapper section-padding">
-            <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.6 }}
-                className="space-y-12"
-            >
-                {/* Section header */}
-                <div className="max-w-3xl">
-                    <motion.span
-                        className="text-label text-accent-primary mb-4 block"
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                    >
-                        Projects
-                    </motion.span>
-                    <motion.h2
-                        className="text-headline text-text-primary dark:text-text-primary"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                    >
-                        Building &
-                        <span className="gradient-text"> learning in public</span>
-                    </motion.h2>
-                    <motion.p
-                        className="text-body text-text-secondary dark:text-text-secondary mt-4"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        Paper implementations and hands-on explorations of ML concepts
-                    </motion.p>
-                </div>
+        <section id="projects" className="wrap section divider">
+            <p className="eyebrow mb-2">Selected projects</p>
+            <p className="text-sm text-muted mb-6">Click a project to read more.</p>
+            <div>
+                {current.map((project) => (
+                    <ProjectCard key={project.title} project={project} />
+                ))}
+            </div>
 
-                {/* Featured projects - Large cards */}
-                <div className="grid md:grid-cols-2 gap-6">
-                    {featuredProjects.map((project, idx) => (
-                        <motion.div
-                            key={project.id}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: '-50px' }}
-                            transition={{ delay: idx * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                        >
-                            <ProjectCard project={project} featured />
-                        </motion.div>
-                    ))}
-                </div>
-
-                {/* Other projects - Smaller cards */}
-                <div className="grid md:grid-cols-2 gap-6">
-                    {otherProjects.map((project, idx) => (
-                        <motion.div
-                            key={project.id}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: '-50px' }}
-                            transition={{ delay: idx * 0.1 + 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                        >
-                            <ProjectCard project={project} />
-                        </motion.div>
-                    ))}
-                </div>
-            </motion.div>
+            <p className="eyebrow mt-12 mb-2">Paper implementations</p>
+            <p className="text-sm text-muted mb-6">
+                Earlier work from reading and reimplementing papers I found interesting.
+            </p>
+            <div>
+                {earlier.map((project) => (
+                    <ProjectCard key={project.title} project={project} />
+                ))}
+            </div>
         </section>
     );
 }

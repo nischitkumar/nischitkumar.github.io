@@ -35,3 +35,12 @@ yarn-error.log*
 .idea
 *.swp
 *.swo
+
+# Claude Code
+.claude/
+CLAUDE.md
+.mcp.json
+
+# Personal/source docs not meant for deployment
+Current_CV.pdf
+*.pdf

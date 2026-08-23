@@ -1,31 +1,39 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+
+type ThemeContextValue = {
+    isDark: boolean;
+    toggle: () => void;
+};
+
+const ThemeContext = createContext<ThemeContextValue>({ isDark: false, toggle: () => {} });
+
+export const useTheme = () => useContext(ThemeContext);
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
     const [isDark, setIsDark] = useState(false);
-    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setMounted(true);
-        const stored = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setIsDark(stored ? stored === 'dark' : prefersDark);
+        setIsDark(document.documentElement.classList.contains('dark'));
     }, []);
 
-    useEffect(() => {
-        if (!mounted) return;
-        const html = document.documentElement;
-        if (isDark) {
-            html.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            html.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-        }
-    }, [isDark, mounted]);
+    const toggle = () => {
+        const next = !isDark;
+        setIsDark(next);
+        document.documentElement.classList.toggle('dark', next);
+        localStorage.setItem('theme', next ? 'dark' : 'light');
+    };
 
-    if (!mounted) return <>{children}</>;
-
-    return <>{children}</>;
+    return (
+        <ThemeContext.Provider value={{ isDark, toggle }}>
+            <script
+                // Runs before hydration to avoid a light/dark flash on load.
+                dangerouslySetInnerHTML={{
+                    __html: `(function(){try{var s=localStorage.getItem('theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d);}catch(e){}})();`,
+                }}
+            />
+            {children}
+        </ThemeContext.Provider>
+    );
 }

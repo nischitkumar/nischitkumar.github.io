@@ -1,119 +1,63 @@
-'use client';
+type Project = {
+    title: string;
+    period?: string;
+    summary: string;
+    details: string[];
+    tags: string[];
+    links?: { label: string; href: string }[];
+};
 
-import { motion } from 'framer-motion';
-import { Github, ExternalLink, FileText, ArrowUpRight } from 'lucide-react';
-
-interface ProjectCardProps {
-    project: {
-        id: number;
-        title: string;
-        description: string;
-        impact: string;
-        tech: string[];
-        links: Record<string, string>;
-    };
-    featured?: boolean;
-}
-
-export default function ProjectCard({ project, featured = false }: ProjectCardProps) {
+export default function ProjectCard({ project }: { project: Project }) {
     return (
-        <motion.div
-            className={`glass-card group relative overflow-hidden h-full ${featured ? 'p-8' : 'p-6'
-                }`}
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        >
-            {/* Gradient border on hover */}
-            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                <div className="absolute inset-[1px] rounded-2xl bg-dark-bg dark:bg-dark-bg" />
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent-primary/30 via-transparent to-accent-secondary/30" />
-            </div>
-
-            {/* Content */}
-            <div className="relative z-10 flex flex-col h-full">
-                {/* Header */}
-                <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                        {featured && (
-                            <span className="text-label text-accent-primary mb-2 block">Featured</span>
-                        )}
-                        <h3 className={`${featured ? 'text-subtitle' : 'text-body font-semibold'} text-text-primary dark:text-text-primary group-hover:text-accent-primary transition-colors duration-300`}>
-                            {project.title}
-                        </h3>
-                    </div>
-                    <motion.div
-                        className="ml-4 p-2 rounded-lg bg-white/[0.03] border border-white/[0.06] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        whileHover={{ scale: 1.1 }}
-                    >
-                        <ArrowUpRight size={16} className="text-accent-primary" />
-                    </motion.div>
+        <details className="group py-5 border-b border-border last:border-b-0">
+            <summary className="flex cursor-pointer list-none items-start justify-between gap-4 marker:content-none [&::-webkit-details-marker]:hidden">
+                <div className="min-w-0">
+                    <h3 className="text-sm font-medium text-ink">{project.title}</h3>
+                    <p className="text-sm text-muted mt-1">{project.summary}</p>
                 </div>
-
-                {/* Description */}
-                <p className={`text-text-secondary dark:text-text-secondary ${featured ? 'text-body' : 'text-small'} mb-4 flex-grow`}>
-                    {project.description}
-                </p>
-
-                {/* Impact */}
-                <div className="mb-4 p-3 rounded-lg bg-accent-primary/5 border border-accent-primary/10">
-                    <p className="text-small text-text-secondary dark:text-text-secondary">
-                        <span className="text-accent-primary font-medium">Impact: </span>
-                        {project.impact}
-                    </p>
+                <div className="flex items-center gap-3 shrink-0 pt-0.5">
+                    {project.period && (
+                        <span className="font-mono text-xs text-faint whitespace-nowrap hidden sm:inline">
+                            {project.period}
+                        </span>
+                    )}
+                    <span className="text-faint text-xs transition-transform group-open:rotate-45">
+                        [+]
+                    </span>
                 </div>
+            </summary>
 
-                {/* Tech stack */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map(tech => (
+            <div className="mt-3 pl-0">
+                <ul className="space-y-1.5 list-disc marker:text-faint pl-4">
+                    {project.details.map((line) => (
+                        <li key={line} className="text-sm text-muted leading-relaxed">
+                            {line}
+                        </li>
+                    ))}
+                </ul>
+
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                    {project.tags.map((tag) => (
                         <span
-                            key={tech}
-                            className="tag text-xs"
+                            key={tag}
+                            className="font-mono text-[11px] text-muted border border-border rounded px-1.5 py-0.5"
                         >
-                            {tech}
+                            {tag}
                         </span>
                     ))}
-                </div>
-
-                {/* Links */}
-                <div className="flex items-center gap-4 pt-4 border-t border-white/[0.06]">
-                    {project.links.github && (
-                        <motion.a
-                            href={project.links.github}
+                    {project.links?.map((link) => (
+                        <a
+                            key={link.label}
+                            href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-small text-text-muted dark:text-text-muted hover:text-accent-primary transition-colors"
-                            whileHover={{ x: 2 }}
+                            className="link-quiet text-xs ml-1"
                         >
-                            <Github size={16} />
-                            <span>Code</span>
-                        </motion.a>
-                    )}
-                    {project.links.demo && (
-                        <motion.a
-                            href={project.links.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-small text-text-muted dark:text-text-muted hover:text-accent-primary transition-colors"
-                            whileHover={{ x: 2 }}
-                        >
-                            <ExternalLink size={16} />
-                            <span>Demo</span>
-                        </motion.a>
-                    )}
-                    {project.links.paper && (
-                        <motion.a
-                            href={project.links.paper}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-small text-text-muted dark:text-text-muted hover:text-accent-primary transition-colors"
-                            whileHover={{ x: 2 }}
-                        >
-                            <FileText size={16} />
-                            <span>Paper</span>
-                        </motion.a>
-                    )}
+                            {link.label}
+                        </a>
+                    ))}
                 </div>
             </div>
-        </motion.div>
+        </details>
     );
 }
